@@ -6,14 +6,19 @@
 
   const utterance = new SpeechSynthesisUtterance();
   utterance.lang = "en-UK";
+  utterance.rate = 1;
+  utterance.pitch = 1;
+  utterance.voice = speechSynthesis.getVoices()[0];
 
   let questionLayout;
   let question = {};
   let wordIndex = 1;
+  let currentSpeakIndex = 0;
 
   renderInit();
-  let questionId, questionAudioText;
+  let questionId, questionAudioList;
   const inputResult = document.getElementById("result-input");
+  const wordSpans = document.getElementsByClassName("word_span");
 
   function renderInit() {
     const eleRightPanel = `<div class="row justify-content-center avatar-row">
@@ -95,18 +100,18 @@
             <div class="img-container-large">
                
             </div>
-            <h1 class="word_span_1">${question.larger_number.value}</h1>
+            <h1 class="word_span">${question.larger_number.value}</h1>
             <div><span>(</span>${question.larger_number.spelling}<span>)</span></div>
         </div>
-        <div class="col-md-1 text-center"><h1 class="word_span_2" id="operator">${question.operator.symbol}</h1></div>
+        <div class="col-md-1 text-center"><h1 class="word_span" id="operator">${question.operator.symbol}</h1></div>
         <div class="col-md-4 text-center">
             <div class="img-container-small">
                
             </div>
-            <h1 class="word_span_3">${question.smaller_number.value}</h1>
+            <h1 class="word_span">${question.smaller_number.value}</h1>
             <div><span>(</span>${question.smaller_number.spelling}<span>)</span></div>
         </div>
-        <div class="col-md-1 text-center"><h1 class="word_span_4">=</h1></div>
+        <div class="col-md-1 text-center"><h1 class="word_span">=</h1></div>
         <div class="col-md-2 .d-flex justify-content-center">
             <input type="text" id="result-input" class="form-control input-lg"/>
             <span id="input-error-msg" class="hide"> Incorrect Answer </span>
@@ -128,7 +133,7 @@
                 <div class="col-md-4 text-right d-flex justify-content-end">
                     <div class="img-container-large d-flex align-items-center mr-5">
                     </div>
-                    <h1 class="word_span_1" style="letter-spacing:16px">${question.larger_number.value}</h1>
+                    <h1 class="word_span" style="letter-spacing:16px">${question.larger_number.value}</h1>
                 </div>
                 <div class="col-md-8 d-flex align-items-center h3 font-weight-normal"><span>(</span>${question.larger_number.spelling}<span>)</span></div>
             </div>
@@ -138,7 +143,7 @@
                 <div class="col-md-4 text-right d-flex justify-content-end">
                     <div class="img-container-small d-flex align-items-center mr-3">
                     </div>
-                    <h1 style="letter-spacing:16px"><span class="word_span_2">${question.operator.symbol}</span><span class="word_span_3">${question.smaller_number.value}</span></h1>
+                    <h1 style="letter-spacing:16px"><span class="word_span">${question.operator.symbol}</span><span class="word_span">${question.smaller_number.value}</span></h1>
                 </div>
                 <div class="col-md-8 d-flex align-items-center h3 font-weight-normal"><span>(</span>${question.smaller_number.spelling}<span>)</span></div>
             </div>
@@ -146,7 +151,7 @@
         <div class="col-md-12 mb-1">
             <div class="row">
                 <div class="col-md-5">
-                    <hr class="divider w-75 word_span_4"></hr>
+                    <hr class="divider w-75 word_span"></hr>
                 </div>
             </div>
         </div>
@@ -177,7 +182,7 @@
 
     questionId =
       json.data && json.data.question_id ? json.data.question_id : "";
-    questionAudioText = `${question.larger_number.spelling} ${question.operator.spelling} ${question.smaller_number.spelling}`;
+    questionAudioList = [question.larger_number.spelling,question.operator.spelling,question.smaller_number.spelling,'equals'];
 
     return question;
   }
@@ -248,9 +253,12 @@
   }
 
   function onPlayBtnClick() {
-    const text = questionAudioText + "equals";
-    utterance.rate = 1;
-    utterance.text = text;
+    currentSpeakIndex = 0;
+    speakQuestion(currentSpeakIndex)
+  }
+
+  function speakQuestion(index){
+    utterance.text = questionAudioList[index]
     speechSynthesis.speak(utterance);
   }
 
@@ -260,28 +268,17 @@
     renderQuestion(question, toggleLayout);
   }
 
-  utterance.onboundary = function(event) {
-    wordIndex < 5
-      ? (document.getElementsByClassName(
-          "word_span_" + wordIndex
-        )[0].style.color = "red")
-      : "";
+  function toogleHighlight(){
+    wordSpans[currentSpeakIndex].classList.toggle('highlight');
+  }
 
-    if (wordIndex > 1 && wordIndex < 5) {
-      let previousWordIndex = wordIndex - 1;
-
-      setTimeout(function() {
-        document.getElementsByClassName(
-          "word_span_" + previousWordIndex
-        )[0].style.color = "#212529";
-      }, 500);
-    }
-    wordIndex++;
-  };
+  utterance.onstart = toogleHighlight
 
   utterance.onend = function() {
-    wordIndex = 1;
-    document.getElementsByClassName("word_span_4")[0].style.color = "#212529";
+    toogleHighlight();
+    if(currentSpeakIndex<wordSpans.length-1){
+      speakQuestion(++currentSpeakIndex);
+    }
   };
 
   $("#center-panel").on("input", "#result-input", onResultInputChange);

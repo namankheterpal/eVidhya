@@ -17,3 +17,8 @@
   display: block;
   text-align: center;
 }
+.highlight{
+  color: red;
+  transform: scale(1.2); 
+  display: inline-block;
+}
