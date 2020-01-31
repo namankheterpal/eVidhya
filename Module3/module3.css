@@ -1,0 +1,85 @@
+.row{
+    padding-bottom: 20px;
+}
+
+.box{
+    width: max-content;
+    height: 40px;
+    background-color: rgb(224, 228, 226);
+    border: 1px solid black;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 200;
+    margin-left: 10px;
+}
+
+.blanks{
+    margin-left: 10px;
+    min-height: 30px;
+    min-width: 50px;
+    width: max-content;
+    height: max-content;
+    border-bottom: 2px solid black;
+    font-size: 1.5rem;
+    font-weight: 200;
+    transition: 0.2s all ease-in;
+}
+
+.wrongAnswer{
+    font-size: 1.5rem;
+    font-weight: 200;
+    animation: wobbleText 0.5s infinite;
+}
+
+@keyframes wobbleText{
+    from{
+    }
+    to{
+        font-size: 1.6rem;
+        color: lightcoral;
+    }
+}
+
+.blanks:hover{
+    font-size: 1.6rem;
+    animation: expand 1s infinite;
+}
+
+@keyframes expand{
+    0%, 20%, 100% {
+        min-width: 50px;
+        border-bottom: 2px solid black;
+    } 
+   40%,50%{
+       min-width: 60px;
+       border-bottom: 2px solid aqua;
+    } 
+   60%,80% {
+       min-width: 60px;
+       border-bottom: 2px solid brown;
+   } 
+}
+
+.next-stage-btn{
+    margin-top: 20px;
+    transition: all 0.9s ease-in;
+}
+
+.next-stage-btn-wobbel{
+    transition: all 0.9s ease-in;
+    animation: wobble 1s infinite;
+}
+
+@keyframes wobble{
+    0%, 20%, 100%{
+        width: 12%;
+    }
+    40%,50%{
+        width: 20%;
+        background-color: lightgreen;
+    }
+    60%,80% {
+       width: 15%;
+       background-color: lightsalmon;
+   } 
+}
