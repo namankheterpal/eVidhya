@@ -52,7 +52,7 @@ function renderWorng(bucketText, user_response){
 
 function speak(msg){
     let speech = new SpeechSynthesisUtterance();
-    speech.rate = 0.7;
+    speech.rate = 1;
     speech.pitch = 1;
     speech.volume = 1;
     speech.voice = speechSynthesis.getVoices()[0];
@@ -72,9 +72,9 @@ function getData(){
         "status_code": 200,
         "message": "Problem fetched successfully",
         "data": {
-            "text": "A",
+            "text": "B",
             "asset": "http://15.206.80.44/storage/images/alphabets/A.png",
-            "caption": "A for Apple",
+            "caption": "B for Ball",
             "answer": "0",
             "helper": {
                 "vowel": 0,

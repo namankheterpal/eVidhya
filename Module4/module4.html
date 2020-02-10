@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./module4.css">
+</head>
+    <body>
+        <div class="container-fluid module1-container">
+            <div class="row">
+                <div class="col-sm-2 bg-light">
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="#">E-Vidya</a>
+                        <a class="nav-link" href="#">Activities</a>
+                        <a class="nav-link" href="#">Help</a>
+                        <a class="nav-link " href="#">About</a>
+                    </nav>
+                </div>
+                <div class="col-sm-7" id="center-panel">
+                    <div class="learner-matching-wrapper">
+                        <div class="learner-matching-wrapper-inner">
+                          <div class="learner-matching-column learner-matching-column-all">
+                            <h2>Words</h2>
+                            <div>
+                              <div class="word-card">
+                                <ul class="connected-sortable">
+                                  <li class="ui-state-default hidden" style="user-select: none">
+                                    <div class="swipe-text-cntr">
+                                      <p></p>
+                                      <p style="padding: 15px;text-align: right;"></span>
+                                    </div>
+                                  </li>
+                                  
+                                </ul>
+                        
+                              </div>
+                              
+                              <img style="user-drag: none; 
+                              user-select: none;
+                              -moz-user-select: none;
+                              -webkit-user-drag: none;
+                              -webkit-user-select: none;
+                              -ms-user-select: none;
+                              margin: auto;
+                              display: block;
+                              padding: 15px;" id= "swipe-img" src="" alt="image of apple" height="250" width="250" ></img>
+                              
+                              <div class="word-card">
+                                <ul class="connected-sortable droppable-area1" id="item-bank"></ul>
+                        
+                              </div>
+
+                            </div>
+                          </div>
+                          <div class="learner-matching-column learner-matching-column-options">
+                          <div class="learner-matching-column-inner learner-matching-column-kids">
+                            <h2>Vowels</h2>
+                            <ul class="connected-sortable droppable-area droppable-area2" id="child-target">
+                              <!--the items will go here-->
+                            </ul>
+                          </div>    
+                          <div class="learner-matching-column-inner learner-matching-column-adults">
+                            <h2>  Consonants</h2>
+                            <ul class="connected-sortable droppable-area droppable-area3" id="adult-target">
+                              <!--the items will go here-->
+                            </ul>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm">
+                            <button type="button" class="btn btn-primary btn-lg btn-block next-stage-btn hidden">Go to next stage</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 bg-light">
+                  <div class="row justify-content-center avatar-row">
+                      <div class="col align-self-center">
+                         
+                              <!-- <img src="http://15.206.80.44/storage/avatar.png" style="height: 150px; width: 150px;" alt="Avatar" class="avatar">
+                               -->
+                               <div id="cssHead">
+                                  <div class="cssEye leftEye">
+                                      <div class="cssEyeLid">
+                                          <div class="cssPupil">
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="cssEye rightEye">
+                                      <div class="cssEyeLid">
+                                          <div class="cssPupil">                      
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="cssMouth">
+                                  </div>       
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src = "./module4.js"></script>
+    </body>
+</html>
